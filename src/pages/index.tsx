@@ -1,3 +1,5 @@
+import server from '../../server.json'
+
 export default function Home(props)
 {
 	return (
@@ -8,12 +10,11 @@ export default function Home(props)
 }
 
 export async function getStaticProps() {
-	const res = await fetch('http://localhost:7117/episodes')
-	const data = await res.json()
+	const episodes = server.episodes
 
 	return {
 		props: {
-			episodes: data
+			episodes
 		},
 		revalidate: 60 * 60 * 8
 	}
