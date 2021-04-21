@@ -68,8 +68,15 @@ export default function Episode({episode}: EpisodeProps)
 
 export const getStaticPaths: GetStaticPaths = async () =>
 {
+	const episodes = server.episodes
+
+	const paths = episodes.map(episode => (
+		{
+			params: {slug: episode.id}
+		}))
+
 	return {
-		paths: [],
+		paths,
 		fallback: 'blocking'
 	}
 }
