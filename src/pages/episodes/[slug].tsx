@@ -1,3 +1,4 @@
+import { useContext } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { format, parseISO } from 'date-fns'
 import enUS from 'date-fns/locale/en-US'
@@ -6,6 +7,7 @@ import Link from 'next/link'
 
 import server from '../../../server.json'
 import { convertDurationToTimeString } from '../../utils/convertDurationToTimeString'
+import { PlayerContext } from '../../contexts/PlayerContext'
 
 import styles from './episode.module.scss'
 
@@ -29,6 +31,8 @@ type EpisodeProps =
 
 export default function Episode({episode}: EpisodeProps)
 {
+	const {play} = useContext(PlayerContext)
+
 	return (
 		<div className={styles.episode}>
 			<div className={styles.thumbnail}>
@@ -46,7 +50,7 @@ export default function Episode({episode}: EpisodeProps)
 					objectFit='cover'
 				/>
 
-				<button type='button'>
+				<button type='button' onClick={() => play(episode)}>
 					<img src='/play.svg' alt='Play episode'/>
 				</button>
 			</div>
@@ -68,9 +72,11 @@ export default function Episode({episode}: EpisodeProps)
 
 export const getStaticPaths: GetStaticPaths = async () =>
 {
-	const episodes = server.episodes
+	const data = server.episodes
+		.sort((a,b) => a.published_at > b.published_at ? -1 : 1)
+		.slice(0, 2)
 
-	const paths = episodes.map(episode => (
+	const paths = data.map(episode => (
 		{
 			params: {slug: episode.id}
 		}))
