@@ -76,3 +76,11 @@ button
 {
 	cursor: pointer;
 }
+
+@media (max-width: 1024px)
+{
+	.scrollableContent
+	{
+		margin-bottom: 200px;
+	}
+}
