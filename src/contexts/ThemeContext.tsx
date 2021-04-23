@@ -12,7 +12,7 @@ const ThemeContext = createContext({} as ThemeContextData)
 
 export const ThemeProvider: React.FC = ({children}:{children: ReactNode}) =>
 {
-	const [isDark, setIsDark] = useState(true)
+	const [isDark, setIsDark] = useState(false)
 
 	useEffect(() =>
 	{
