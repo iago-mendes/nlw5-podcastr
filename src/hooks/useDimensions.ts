@@ -6,8 +6,8 @@ function useDimensions()
 	const [height, setHeight] = useState(800)
 
 	const inMobile = width <= 600
-	const inTablet = width > 600 || width <= 1000
-	const inDesktop = width > 1000
+	const inTablet = width > 600 || width <= 1024
+	const inDesktop = width > 1024
 	
 	useEffect(() =>
 	{

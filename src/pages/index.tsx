@@ -9,6 +9,7 @@ import server from '../../server.json'
 import { convertDurationToTimeString } from '../utils/convertDurationToTimeString'
 import { truncateText } from '../utils/truncateText'
 import { usePlayer } from '../contexts/PlayerContext'
+import useDimensions from '../hooks/useDimensions'
 
 import styles from './home.module.scss'
 
@@ -33,8 +34,10 @@ type HomeProps =
 export default function Home({latestEpisodes, allEpisodes}: HomeProps)
 {
 	const {playList} = usePlayer()
+	const {inMobile} = useDimensions()
 
 	const episodeList = [...latestEpisodes, ...allEpisodes]
+	const titleLength = inMobile ? 50 : 80
 
 	return (
 		<div className={styles.homepage}>
@@ -58,7 +61,7 @@ export default function Home({latestEpisodes, allEpisodes}: HomeProps)
 
 							<div className={styles.episodeDetails}>
 								<Link href={`/episodes/${episode.id}`} >
-									{truncateText(episode.title, 80)}
+									{truncateText(episode.title, titleLength)}
 								</Link>
 								<p>{episode.members}</p>
 								<span>{episode.publishedAt}</span>
@@ -76,48 +79,81 @@ export default function Home({latestEpisodes, allEpisodes}: HomeProps)
 			<section className={styles.allEpisodes}>
 				<h2>All episodes</h2>
 
-				<table cellSpacing={0}>
-					<thead>
-						<tr>
-							<th></th>
-							<th>Podcast</th>
-							<th>Members</th>
-							<th>Date</th>
-							<th>Duration</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						{allEpisodes.map((episode, index) => (
-							<tr key={episode.id}>
-								<td style={{width: 72}}>
+				{
+					inMobile
+					? (
+						<ul>
+							{allEpisodes.map((episode, index) => (
+								<li key={episode.id}>
 									<Image
 										src={episode.thumbnail}
 										alt={episode.title}
-										width={120}
-										height={120}
+										width={192}
+										height={192}
 										objectFit='cover'
 									/>
-								</td>
-								<td>
-									<Link href={`/episodes/${episode.id}`} >
-										{truncateText(episode.title, 80)}
-									</Link>
-								</td>
-								<td>{truncateText(episode.members, 60)}</td>
-								<td style={{width: 100}}>
-									{episode.publishedAt}
-								</td>
-								<td>{episode.durationAsString}</td>
-								<td>
-									<button type='button' onClick={() => playList(episodeList, index + latestEpisodes.length)}>
+
+									<div className={styles.episodeDetails}>
+										<Link href={`/episodes/${episode.id}`} >
+											{truncateText(episode.title, titleLength)}
+										</Link>
+										<p>{episode.members}</p>
+										<span>{episode.publishedAt}</span>
+										<span>{episode.durationAsString}</span>
+									</div>
+
+									<button type='button' onClick={() => playList(episodeList, index)} >
 										<img src='/play-green.svg' alt='Play episode'/>
 									</button>
-								</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
+								</li>
+							))}
+						</ul>
+					)
+					: (
+						<table cellSpacing={0}>
+							<thead>
+								<tr>
+									<th></th>
+									<th>Podcast</th>
+									<th>Members</th>
+									<th>Date</th>
+									<th>Duration</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								{allEpisodes.map((episode, index) => (
+									<tr key={episode.id}>
+										<td style={{width: 72}}>
+											<Image
+												src={episode.thumbnail}
+												alt={episode.title}
+												width={120}
+												height={120}
+												objectFit='cover'
+											/>
+										</td>
+										<td>
+											<Link href={`/episodes/${episode.id}`} >
+												{truncateText(episode.title, titleLength)}
+											</Link>
+										</td>
+										<td>{truncateText(episode.members, 60)}</td>
+										<td style={{width: 100}}>
+											{episode.publishedAt}
+										</td>
+										<td>{episode.durationAsString}</td>
+										<td>
+											<button type='button' onClick={() => playList(episodeList, index + latestEpisodes.length)}>
+												<img src='/play-green.svg' alt='Play episode'/>
+											</button>
+										</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					)
+				}
 			</section>
 		</div>
 	)

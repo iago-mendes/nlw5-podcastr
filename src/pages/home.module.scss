@@ -11,7 +11,7 @@
 	}
 }
 
-.latestEpisodes
+.latestEpisodes, .allEpisodes
 {
 	ul
 	{
@@ -210,6 +210,17 @@
 					filter: brightness(0.9);
 				}
 			}
+		}
+	}
+}
+
+@media (max-width: 600px)
+{
+	.latestEpisodes, .allEpisodes
+	{
+		ul
+		{
+			grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
 		}
 	}
 }
