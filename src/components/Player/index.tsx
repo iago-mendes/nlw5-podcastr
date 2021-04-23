@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import Slider from 'rc-slider'
+import { FaExpandArrowsAlt, FaCompressArrowsAlt} from 'react-icons/fa'
 
 import { usePlayer } from '../../contexts/PlayerContext'
 import { convertDurationToTimeString } from '../../utils/convertDurationToTimeString'
@@ -75,6 +76,12 @@ export function Player()
 		<div className={styles.playerContainer}>
 			{(inDesktop || isExpanded) && (
 				<>
+					<div className={styles.expandContainer} >
+						<button onClick={() => setIsExpanded(false)} >
+							<FaCompressArrowsAlt />
+						</button>
+					</div>
+
 					<header>
 						<img src='/playing.svg' alt='Playing now'/>
 						<strong>Playing now</strong>
@@ -181,6 +188,14 @@ export function Player()
 						<img src='/repeat.svg' alt='Repeat' />
 					</button>
 				</div>
+
+				{(!inDesktop && !isExpanded) && (
+					<div className={styles.expandContainer} >
+						<button onClick={() => setIsExpanded(true)} >
+							<FaExpandArrowsAlt />
+						</button>
+					</div>
+				)}
 			</footer>
 		</div>
 	)

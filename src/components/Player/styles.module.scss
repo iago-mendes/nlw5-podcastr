@@ -1,4 +1,5 @@
-.playerContainer {
+.playerContainer
+{
 	width: 26.5rem;
 	height: 100vh;
 	padding: 3rem 4rem;
@@ -148,6 +149,23 @@
 	}
 }
 
+.expandContainer
+{
+	width: 100%;
+	
+	display: flex;
+	justify-content: flex-end;
+
+	button
+	{
+		background: none;
+		border: none;
+
+		color: #fff;
+		font-size: 1.75rem;
+	}
+}
+
 @media (max-width: 1024px)
 {
 	.playerContainer
@@ -157,5 +175,8 @@
 
 		width: 100%;
 		height: fit-content;
+		gap: 1rem;
+
+		padding: 1rem;
 	}
 }
