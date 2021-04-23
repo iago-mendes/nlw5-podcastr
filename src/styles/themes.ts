@@ -1,8 +1,8 @@
 export type Theme =
 {
-	background: string
+	background1: string
+	background2: string
 
-	detail1: string
 	detail2: string
 	detail3: string
 	detail4: string
@@ -18,9 +18,9 @@ export type Theme =
 
 export const light: Theme =
 {
-	background: '#FFF',
+	background1: '#FFF',
+	background2: '#F7F8FA',
 
-	detail1: '#F7F8FA',
 	detail2: '#E6E8EB',
 	detail3: '#AFB2B1',
 	detail4: '#808080',
@@ -36,13 +36,13 @@ export const light: Theme =
 
 export const dark: Theme =
 {
-	background: '#191622',
-
-	detail1: '#221e2e',
-	detail2: '#2e283e',
-	detail3: '#39324d',
-	detail4: '#443c5d',
-	detail5: '#483C67',
+	background1: '#191622',
+	background2: '#221e2e',
+	
+	detail2: '#494D4B',
+	detail3: '#808080',
+	detail4: '#AFB2B1',
+	detail5: '#E6E8EB',
 
 	secondary: '#04D361',
 	

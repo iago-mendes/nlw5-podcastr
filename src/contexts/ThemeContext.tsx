@@ -40,9 +40,9 @@ export const ThemeProvider: React.FC = ({children}:{children: ReactNode}) =>
 	function setThemeVariables(theme: Theme)
 	{
 		
-		document.documentElement.style.setProperty('--white', theme.background)
+		document.documentElement.style.setProperty('--white', theme.background1)
 
-		document.documentElement.style.setProperty('--gray-50', theme.detail1)
+		document.documentElement.style.setProperty('--gray-50', theme.background2)
 		document.documentElement.style.setProperty('--gray-100', theme.detail2)
 		document.documentElement.style.setProperty('--gray-200', theme.detail3)
 		document.documentElement.style.setProperty('--gray-500', theme.detail4)
