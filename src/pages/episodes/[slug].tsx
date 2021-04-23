@@ -1,13 +1,13 @@
-import { useContext } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { format, parseISO } from 'date-fns'
 import enUS from 'date-fns/locale/en-US'
 import Image from 'next/image'
+import Head from 'next/head'
 import Link from 'next/link'
 
 import server from '../../../server.json'
 import { convertDurationToTimeString } from '../../utils/convertDurationToTimeString'
-import { PlayerContext } from '../../contexts/PlayerContext'
+import { usePlayer } from '../../contexts/PlayerContext'
 
 import styles from './episode.module.scss'
 
@@ -31,41 +31,47 @@ type EpisodeProps =
 
 export default function Episode({episode}: EpisodeProps)
 {
-	const {play} = useContext(PlayerContext)
+	const {play} = usePlayer()
 
 	return (
-		<div className={styles.episode}>
-			<div className={styles.thumbnail}>
-				<Link href='/'>
-					<button type='button'>
-						<img src='/arrow-left.svg' alt='Go back'/>
+		<div className={styles.container}>
+			<div className={styles.episode}>
+				<Head>
+					<title>{episode.title} | Podcastr</title>
+				</Head>
+
+				<div className={styles.thumbnail}>
+					<Link href='/'>
+						<button type='button'>
+							<img src='/arrow-left.svg' alt='Go back'/>
+						</button>
+					</Link>
+
+					<Image
+						src={episode.thumbnail}
+						alt={episode.title}
+						width={700}
+						height={160}
+						objectFit='cover'
+					/>
+
+					<button type='button' onClick={() => play(episode)}>
+						<img src='/play.svg' alt='Play episode'/>
 					</button>
-				</Link>
+				</div>
 
-				<Image
-					src={episode.thumbnail}
-					alt={episode.title}
-					width={700}
-					height={160}
-					objectFit='cover'
+				<header>
+					<h1>{episode.title}</h1>
+					<span>{episode.members}</span>
+					<span>{episode.publishedAt}</span>
+					<span>{episode.durationAsString}</span>
+				</header>
+
+				<div
+					className={styles.description}
+					dangerouslySetInnerHTML={{__html: episode.description}}
 				/>
-
-				<button type='button' onClick={() => play(episode)}>
-					<img src='/play.svg' alt='Play episode'/>
-				</button>
 			</div>
-
-			<header>
-				<h1>{episode.title}</h1>
-				<span>{episode.members}</span>
-				<span>{episode.publishedAt}</span>
-				<span>{episode.durationAsString}</span>
-			</header>
-
-			<div
-				className={styles.description}
-				dangerouslySetInnerHTML={{__html: episode.description}}
-			/>
 		</div>
 	)
 }

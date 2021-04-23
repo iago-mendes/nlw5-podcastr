@@ -1,5 +1,6 @@
 import format from 'date-fns/format'
 import enUS from 'date-fns/locale/en-US'
+import Link from 'next/link'
 
 import styles from './styles.module.scss'
 
@@ -9,7 +10,9 @@ export function Header()
 
 	return (
 		<header className={styles.headerContainer} >
-			<img src='/logo.svg' alt='Podcastr'/>
+			<Link href='/'>
+				<img src='/logo.svg' alt='Podcastr'/>
+			</Link>
 
 			<p>The best for you to hear, always</p>
 
