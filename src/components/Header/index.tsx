@@ -2,15 +2,18 @@ import format from 'date-fns/format'
 import enUS from 'date-fns/locale/en-US'
 import Link from 'next/link'
 import Switch from 'react-switch'
-import {FiSun, FiMoon, FiMenu} from 'react-icons/fi'
+import {FiSun, FiMoon} from 'react-icons/fi'
 
 import { useTheme } from '../../contexts/ThemeContext'
+import useDimensions from '../../hooks/useDimensions'
 
 import styles from './styles.module.scss'
 
 export function Header()
 {
 	const {isDark, changeTheme} = useTheme()
+	const {inMobile} = useDimensions()
+
 	const currentDate = format(new Date(), 'EEEEEE, d MMM', {locale: enUS})
 
 	return (
@@ -19,10 +22,14 @@ export function Header()
 				<img src='/logo.svg' alt='Podcastr'/>
 			</Link>
 
-			<p>The best for you to hear, always</p>
+			{!inMobile && (
+				<p>The best for you to hear, always</p>
+			)}
 
 			<div className={styles.group}>
-				<span>{currentDate}</span>
+				{!inMobile && (
+					<span>{currentDate}</span>
+				)}
 				
 				<Switch
 					checked={isDark}
