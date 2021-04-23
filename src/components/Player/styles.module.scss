@@ -147,3 +147,15 @@
 		}
 	}
 }
+
+@media (max-width: 1000px)
+{
+	.playerContainer
+	{
+		position: absolute;
+		bottom: 0;
+
+		width: 100%;
+		height: fit-content;
+	}
+}

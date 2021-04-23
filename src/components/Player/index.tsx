@@ -4,6 +4,7 @@ import Slider from 'rc-slider'
 
 import { usePlayer } from '../../contexts/PlayerContext'
 import { convertDurationToTimeString } from '../../utils/convertDurationToTimeString'
+import useDimensions from '../../hooks/useDimensions'
 
 import styles from './styles.module.scss'
 import 'rc-slider/assets/index.css'
@@ -28,8 +29,10 @@ export function Player()
 		hasPrevious
 	} = usePlayer()
 	const audioRef = useRef<HTMLAudioElement>(null)
+	const {inDesktop} = useDimensions()
 
 	const [progress, setProgress] = useState(0)
+	const [isExpanded, setIsExpanded] = useState(false)
 
 	const episode = episodeList[currentEpisodeIndex]
 
@@ -70,32 +73,36 @@ export function Player()
 
 	return (
 		<div className={styles.playerContainer}>
-			<header>
-				<img src='/playing.svg' alt='Playing now'/>
-				<strong>Playing now</strong>
-			</header>
+			{(inDesktop || isExpanded) && (
+				<>
+					<header>
+						<img src='/playing.svg' alt='Playing now'/>
+						<strong>Playing now</strong>
+					</header>
 
-			{
-				episode
-				? (
-					<div className={styles.currentEpisode}>
-						<Image
-							src={episode.thumbnail}
-							alt={episode.title}
-							width={592}
-							height={592}
-							objectFit='cover'
-						/>
-						<strong>{episode.title}</strong>
-						<span>{episode.members}</span>
-					</div>
-				)
-				: (
-					<div className={styles.emptyPlayer}>
-						<strong>Select a podcast to listen</strong>
-					</div>
-				)
-			}
+					{
+						episode
+						? (
+							<div className={styles.currentEpisode}>
+								<Image
+									src={episode.thumbnail}
+									alt={episode.title}
+									width={592}
+									height={592}
+									objectFit='cover'
+								/>
+								<strong>{episode.title}</strong>
+								<span>{episode.members}</span>
+							</div>
+						)
+						: (
+							<div className={styles.emptyPlayer}>
+								<strong>Select a podcast to listen</strong>
+							</div>
+						)
+					}
+				</>
+			)}
 
 			<footer className={!episode ? styles.empty : ''}>
 				<div className={styles.progress}>
