@@ -25,14 +25,14 @@
 
 html
 {
-	font-size: 80%;
+	font-size: 81.25%; // 13px
 }
 
 @media (max-width: 1000px)
 {
 	html
 	{
-		font-size: 93.75%;
+		font-size: 75%; // 12px
 	}	
 }
 
@@ -40,7 +40,7 @@ html
 {
 	html
 	{
-		font-size: 87.5%;
+		font-size: 68.75%; // 11px
 	}	
 }
 
