@@ -1,11 +1,16 @@
 import format from 'date-fns/format'
 import enUS from 'date-fns/locale/en-US'
 import Link from 'next/link'
+import Switch from 'react-switch'
+import {FiSun, FiMoon, FiMenu} from 'react-icons/fi'
+
+import { useTheme } from '../../contexts/ThemeContext'
 
 import styles from './styles.module.scss'
 
 export function Header()
 {
+	const {isDark, changeTheme} = useTheme()
 	const currentDate = format(new Date(), 'EEEEEE, d MMM', {locale: enUS})
 
 	return (
@@ -15,6 +20,19 @@ export function Header()
 			</Link>
 
 			<p>The best for you to hear, always</p>
+
+			<Switch
+				checked={isDark}
+				onChange={changeTheme}
+				offColor='#ffe4ad'
+				offHandleColor='#ffad05'
+				uncheckedIcon={<div style={{color: '#ffad05'}} className='themeIcon'><FiSun/></div>}
+				onColor='#44475a'
+				onHandleColor='#6272a4'
+				checkedIcon={<div style={{color: '#6272a4'}} className='themeIcon'><FiMoon/></div>}
+				height={30}
+				width={65}
+			/>
 
 			<span>{currentDate}</span>
 		</header>
