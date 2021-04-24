@@ -40,12 +40,12 @@ export default function Home({latestEpisodes, allEpisodes}: HomeProps)
 	const titleLength = inMobile ? 50 : 80
 
 	return (
-		<div className={styles.homepage}>
+		<div className='scrollableContent'>
 			<SEOHead
 				title='Home | Podcastr'
 			/>
 
-			<div className='scrollableContent'>
+			<div className={styles.homepage}>
 				<section className={styles.latestEpisodes}>
 					<h2>Last releases</h2>
 

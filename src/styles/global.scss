@@ -77,10 +77,18 @@ button
 	cursor: pointer;
 }
 
+.scrollableContent
+{
+	height: calc(100vh - 6.5rem);
+	overflow-y: auto;
+}
+
 @media (max-width: 1024px)
 {
 	.scrollableContent
 	{
-		margin-bottom: 200px;
+		height: fit-content;
+
+		margin-bottom: 150px;
 	}
 }
