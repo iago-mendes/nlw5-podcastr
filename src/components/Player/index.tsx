@@ -76,11 +76,13 @@ export function Player()
 		<div className={styles.playerContainer}>
 			{(inDesktop || isExpanded) && (
 				<>
-					<div className={styles.expandContainer} >
-						<button onClick={() => setIsExpanded(false)} >
-							<FaCompressArrowsAlt />
-						</button>
-					</div>
+					{!inDesktop && (
+						<div className={styles.expandContainer} >
+							<button onClick={() => setIsExpanded(false)} >
+								<FaCompressArrowsAlt />
+							</button>
+						</div>
+					)}
 
 					<header>
 						<img src='/playing.svg' alt='Playing now'/>
