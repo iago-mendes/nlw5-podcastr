@@ -35,6 +35,8 @@ const SEOHead: React.FC<SEOHeadProps> = ({title, description, image}) =>
 			<meta property='twitter:title' content={meta.title} />
 			<meta property='twitter:description' content={meta.description} />
 			<meta property='twitter:image' content={meta.image} />
+
+			<meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover' />
 		</Head>
 	)
 }

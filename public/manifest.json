@@ -1,0 +1,22 @@
+{
+  "name": "Podcastr",
+  "short_name": "Podcastr",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#9F75FF",
+  "background_color": "#FFFFFF",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "64x64",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+		{
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
