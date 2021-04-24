@@ -178,5 +178,20 @@
 		gap: 1rem;
 
 		padding: 1rem;
+		max-height: 90vh;
+	}
+
+	.emptyPlayer
+	{
+		width: 20rem;
+	}
+
+	.currentEpisode
+	{
+		img
+		{
+			max-width: 20rem;
+			max-height: 20rem;
+		}
 	}
 }
