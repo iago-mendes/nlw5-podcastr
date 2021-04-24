@@ -2,7 +2,6 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import { format, parseISO } from 'date-fns'
 import enUS from 'date-fns/locale/en-US'
 import Image from 'next/image'
-import Head from 'next/head'
 import Link from 'next/link'
 
 import server from '../../../server.json'
