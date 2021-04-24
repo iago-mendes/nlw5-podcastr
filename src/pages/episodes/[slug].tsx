@@ -10,6 +10,7 @@ import { convertDurationToTimeString } from '../../utils/convertDurationToTimeSt
 import { usePlayer } from '../../contexts/PlayerContext'
 
 import styles from './episode.module.scss'
+import SEOHead from '../../components/SEOHead'
 
 type Episode =
 {
@@ -33,11 +34,16 @@ export default function Episode({episode}: EpisodeProps)
 {
 	const {play} = usePlayer()
 
+	const plaintextDescription = episode.description
+		.replace('<p>', '').replace('</p>', '')
+
 	return (
 		<div className={styles.container}>
-			<Head>
-				<title>{episode.title} | Podcastr</title>
-			</Head>
+			<SEOHead
+				title={`${episode.title} | Podcastr`}
+				description={plaintextDescription}
+				image={episode.thumbnail}
+			/>
 
 			<div className='scrollableContent'>
 				<div className={styles.episode}>

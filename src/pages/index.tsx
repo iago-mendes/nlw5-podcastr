@@ -10,6 +10,7 @@ import { convertDurationToTimeString } from '../utils/convertDurationToTimeStrin
 import { truncateText } from '../utils/truncateText'
 import { usePlayer } from '../contexts/PlayerContext'
 import useDimensions from '../hooks/useDimensions'
+import SEOHead from '../components/SEOHead'
 
 import styles from './home.module.scss'
 
@@ -41,9 +42,9 @@ export default function Home({latestEpisodes, allEpisodes}: HomeProps)
 
 	return (
 		<div className={styles.homepage}>
-			<Head>
-				<title>Home | Podcastr</title>
-			</Head>
+			<SEOHead
+				title='Home | Podcastr'
+			/>
 
 			<div className='scrollableContent'>
 				<section className={styles.latestEpisodes}>
