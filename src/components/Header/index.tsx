@@ -19,7 +19,15 @@ export function Header()
 	return (
 		<header className={styles.headerContainer} >
 			<Link href='/'>
-				<img src='/logo.svg' alt='Podcastr'/>
+				{
+					isDark
+					? (
+						<img src='/logo-dark.svg' alt='Podcastr'/>
+					)
+					: (
+						<img src='/logo.svg' alt='Podcastr'/>
+					)
+				}
 			</Link>
 
 			{!inMobile && (
